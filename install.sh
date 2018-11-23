@@ -186,9 +186,13 @@ rm tempcron
 
 function ifp_start() {
 sleep 2
-sudo chown -R root:users /usr/local/bin/
-sudo bash -c "cp $COIN_CLI /usr/local/bin/"
-sudo bash -c "cp $COIN_DAEMON /usr/local/bin/"
+if [ -f "/usr/local/bin/$COIN_DAEMON" ]; then
+    echo "${GREEN}Bin files exist, skipping copy."
+else
+    sudo chown -R root:users /usr/local/bin/
+    sudo bash -c "cp $COIN_CLI /usr/local/bin/"
+    sudo bash -c "cp $COIN_DAEMON /usr/local/bin/"
+fi
 rm $COIN_CLI
 rm $COIN_DAEMON
 sleep 10
