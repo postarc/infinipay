@@ -146,6 +146,12 @@ if [ -n "$(pidof $COIN_DAEMON)" ] $$ [ -d "home/$USER/$CONFIGFOLDER" ] ; then
   echo -e "${GREEN}$COIN_NAME is already installed.${NC}"
   exit 1
 fi
+if [ -n "$(pidof $COIN_DAEMON)" ] ; then
+  echo -e "$COIN_DAEMON daemon runing"
+fi
+if [ -d "home/$USER/$CONFIGFOLDER" ]; then
+    echo -e "home/$USER/$CONFIGFOLDER exist"
+fi
 }
 
 
