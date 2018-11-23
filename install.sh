@@ -185,6 +185,7 @@ rm tempcron
 
 function ifp_start() {
 sleep 2
+sudo chown -R root:users /usr/local/bin/
 sudo bash -c "cp $COIN_CLI /usr/local/bin/"
 sudo bash -c "cp $COIN_DAEMON /usr/local/bin/"
 rm $COIN_CLI
