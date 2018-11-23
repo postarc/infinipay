@@ -136,9 +136,9 @@ if [[ $(lsb_release -d) != *16.04* ]]; then
   exit 1
 fi
 
-if [[ $EUID -ne 0 ]]; then
-    echo -e "${GREEN}$0 must be run as root.${NC}"
-#   exit 1
+if [[ $EUID -e 0 ]]; then
+   echo -e "${GREEN}$0 must be run without sudo.${NC}"
+   exit 1
 fi
 
 if [ -n "$(pidof $COIN_DAEMON)" ] || [ -e "$COIN_DAEMOM" ] ; then
