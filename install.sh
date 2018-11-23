@@ -137,7 +137,7 @@ if [[ $(lsb_release -d) != *16.04* ]]; then
 fi
 
 if [[ $EUID -ne 0 ]]; then
-#   echo -e "${GREEN}$0 must be run as root.${NC}"
+    echo -e "${GREEN}$0 must be run as root.${NC}"
 #   exit 1
 fi
 
