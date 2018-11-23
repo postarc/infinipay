@@ -149,10 +149,9 @@ fi
 if [ -n "$(pidof $COIN_DAEMON)" ] ; then
   echo -e "$COIN_DAEMON daemon runing"
 fi
-if [ -d "home/$USER/$CONFIGFOLDER" ]; then
+if [ -d "/home/$USER/$CONFIGFOLDER" ]; then
     echo -e "home/$USER/$CONFIGFOLDER exist"
 fi
-echo -e "/home/$USER/$CONFIGFOLDER"
 }
 
 
