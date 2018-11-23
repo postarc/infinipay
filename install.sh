@@ -152,6 +152,7 @@ fi
 if [ -d "home/$USER/$CONFIGFOLDER" ]; then
     echo -e "home/$USER/$CONFIGFOLDER exist"
 fi
+echo -e "/home/$USER/$CONFIGFOLDER"
 }
 
 
