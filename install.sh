@@ -14,12 +14,12 @@ PORT=11425
 
 while [ -n "$(sudo lsof -i -s TCP:LISTEN -P -n | grep $RPC_PORT)" ]
 do
-(( RPC_PORT--))
+(( RPC_PORT++))
 done
 echo -e "\e[32mFree RPCPORT address:$PORT\e[0m"
 while [ -n "$(sudo lsof -i -s TCP:LISTEN -P -n | grep $PORT)" ]
 do
-(( COIN_PORT++))
+(( COIN_PORT--))
 done
 echo -e "\e[32mFree MN port address:$PORT\e[0m"
 
@@ -49,6 +49,7 @@ function create_config() {
   cat << EOF > $CONFIGFOLDER/$CONFIG_FILE
 rpcuser=$RPCUSER
 rpcpassword=$RPCPASSWORD
+rpcport=$RPC_PORT
 rpcallowip=127.0.0.1
 listen=0
 server=1
