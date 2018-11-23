@@ -16,10 +16,10 @@ while [ -n "$(sudo lsof -i -s TCP:LISTEN -P -n | grep $RPC_PORT)" ]
 do
 (( RPC_PORT++))
 done
-echo -e "\e[32mFree RPCPORT address:$PORT\e[0m"
+echo -e "\e[32mFree RPCPORT address:$RPC_PORT\e[0m"
 while [ -n "$(sudo lsof -i -s TCP:LISTEN -P -n | grep $PORT)" ]
 do
-(( COIN_PORT--))
+(( PORT--))
 done
 echo -e "\e[32mFree MN port address:$PORT\e[0m"
 
