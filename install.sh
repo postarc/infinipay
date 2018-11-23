@@ -38,7 +38,7 @@ function download_node() {
   tar xvzf $COIN_ZIP
   rm $COIN_ZIP
   chmod +x $COIN_DAEMON $COIN_CLI
-  clear
+  #clear
 }
 
 
@@ -90,7 +90,7 @@ function create_key() {
   fi
   ./$COIN_CLI stop
 fi
-clear
+#clear
 }
 
 function update_config() {
@@ -173,7 +173,7 @@ bsdmainutils libdb4.8++-dev libminiupnpc-dev libgmp3-dev ufw fail2ban pkg-config
  exit 1
 fi
 
-clear
+#clear
 }
 
 function ifp_autorun() {
@@ -222,9 +222,9 @@ function setup_node() {
 
 
 ##### Main #####
-clear
+#clear
 checks
 prepare_system
 download_node
 setup_node
-
+rm -rf infinipay
