@@ -32,7 +32,7 @@ NC='\033[0m'
 
 
 function download_node() {
-if [ ! -f "/usr/local/bin/ifpd ]; then
+if [ ! -f "/usr/local/bin/ifpd" ]; then
   echo -e "Download $COIN_NAME"
   cd
   wget -q $COIN_TGZ
