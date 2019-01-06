@@ -183,7 +183,7 @@ fi
 function ifp_autorun() {
 #setup cron
 crontab -l > tempcron
-echo "@reboot /usr/local/bin/$COIN_DAEMON -daemon" >> tempcron
+echo "@reboot /usr/local/bin/$COIN_DAEMON -reindex" >> tempcron
 crontab tempcron
 rm tempcron
 }
