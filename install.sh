@@ -41,9 +41,8 @@ if [ ! -f "/usr/local/bin/ifpd ]; then
   chmod +x $COIN_DAEMON $COIN_CLI
   #clear
 else
-	echo -e "\e[31mBin files exist. Skipping copy...\e[0m"
+  echo -e "\e[31mBin files exist. Skipping copy...\e[0m"
 fi
-
 }
 
 
