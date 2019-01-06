@@ -32,6 +32,7 @@ NC='\033[0m'
 
 
 function download_node() {
+if [ ! -f "/usr/local/bin/ifpd ]; then
   echo -e "Download $COIN_NAME"
   cd
   wget -q $COIN_TGZ
@@ -39,6 +40,10 @@ function download_node() {
   rm $COIN_ZIP
   chmod +x $COIN_DAEMON $COIN_CLI
   #clear
+else
+	echo -e "\e[31mBin files exist. Skipping copy...\e[0m"
+fi
+
 }
 
 
