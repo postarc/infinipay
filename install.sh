@@ -85,14 +85,14 @@ function create_key() {
    echo -e "${GREEN}$COIN_NAME server couldn not start."
    exit 1
   fi
-  COINKEY=$(./$COIN_CLI masternode genkey)
+  COINKEY=$($COIN_CLI masternode genkey)
   if [ "$?" -gt "0" ];
     then
     echo -e "${GREEN}Wallet not fully loaded. Let us wait and try again to generate the Private Key${NC}"
     sleep 30
-    COINKEY=$(./$COIN_CLI masternode genkey)
+    COINKEY=$($COIN_CLI masternode genkey)
   fi
-  ./$COIN_CLI stop
+  $COIN_CLI stop
 fi
 #clear
 }
