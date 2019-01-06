@@ -79,7 +79,7 @@ EOF
 
 function create_key() {
   if [[ -z "$COINKEY" ]]; then
-  ./$COIN_DAEMON -daemon
+  /usr/local/bin/$COIN_DAEMON -daemon
   sleep 30
   if [ -z "$(ps axo cmd:100 | grep $COIN_DAEMON)" ]; then
    echo -e "${GREEN}$COIN_NAME server couldn not start."
