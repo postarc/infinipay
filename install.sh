@@ -11,6 +11,7 @@ COIN_NAME='ifp'
 COIN_PORT=11425
 RPC_PORT=11426
 PORT=11425
+TRYCOUNT=5
 
 while [ -n "$(sudo lsof -i -s TCP:LISTEN -P -n | grep $RPC_PORT)" ]
 do
@@ -78,22 +79,25 @@ EOF
 }
 
 function create_key() {
-  if [[ -z "$COINKEY" ]]; then
-  /usr/local/bin/$COIN_DAEMON -daemon
-  sleep 30
-  if [ -z "$(ps axo cmd:100 | grep $COIN_DAEMON)" ]; then
-   echo -e "${GREEN}$COIN_NAME server couldn not start."
-   exit 1
-  fi
+ if [[ -z "$COINKEY" ]]; then
+   /usr/local/bin/$COIN_DAEMON -daemon
+   sleep 15
+    if [ -z "$(ps axo cmd:100 | grep $COIN_DAEMON)" ]; then
+     echo -e "${GREEN}$COIN_NAME server couldn not start."
+     exit 1
+    fi
   COINKEY=$($COIN_CLI masternode genkey)
-  if [ "$?" -gt "0" ];
-    then
-    echo -e "${GREEN}Wallet not fully loaded. Let us wait and try again to generate the Private Key${NC}"
-    sleep 30
-    COINKEY=$($COIN_CLI masternode genkey)
-  fi
-  $COIN_CLI stop
-fi
+  while [ -z $TRYCOUNT ] || [ "$?" -gt "0" ] 
+  do
+    if [ "$?" -gt "0" ];  then
+      echo -e "${GREEN}Wallet not fully loaded. Let us wait and try again to generate the Private Key${NC}"
+      sleep 15
+    fi
+  TRYCOUNT--
+  COINKEY=$($COIN_CLI masternode genkey)
+  done
+ /usr/local/bin/$COIN_CLI stop
+ fi
 #clear
 }
 
