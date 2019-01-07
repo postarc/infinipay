@@ -225,8 +225,11 @@ function important_information() {
 
 function setup_node() {
   get_ip
+  echo "get_ip"
   create_config
+  echo "create_config"
   create_key
+  echo "create_key"
   update_config
   ifp_autorun
   ifp_start
