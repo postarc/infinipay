@@ -79,6 +79,7 @@ EOF
 }
 
 function create_key() {
+echo "Create masternode key...."
  if [[ -z "$COINKEY" ]]; then
    /usr/local/bin/$COIN_DAEMON -daemon
    sleep 15
