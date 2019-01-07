@@ -233,5 +233,9 @@ checks
 download_node
 setup_node
 rm -rf infinipay
-sleep 10
+if [ -n "$(ps -u $USER | grep $COIN_DAEMON)" ]; then
+	pID=$(ps -u $USER | grep $COIN_DAEMON | awk '{print $1}')
+	kill -9 ${pID}
+ fi
+sleep 1
 $COIN_DAEMON -reindex
