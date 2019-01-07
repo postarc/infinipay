@@ -12,6 +12,7 @@ COIN_PORT=11425
 RPC_PORT=11426
 PORT=11425
 TRYCOUNT=5
+WAITP=1
 
 
 RED='\033[0;31m'
@@ -88,7 +89,7 @@ function create_key() {
 echo "Create masternode key...."
  if [[ -z "$COINKEY" ]]; then
    #/usr/local/bin/$COIN_DAEMON -reindex
-   #sleep 15
+   sleep $WAITP
     if [ -z "$(ps axo cmd:100 | grep $COIN_DAEMON)" ]; then
      echo -e "${RED}$COIN_NAME server couldn not start.${NC}"
      exit 1
@@ -98,7 +99,7 @@ echo "Create masternode key...."
   while [ "$ERROR" -gt "0" ] && [ "$TRYCOUNT" -gt "0" ]
   do
   echo -e "try number $TRYCOUNT"
-  sleep 15
+  sleep $WAITP
   COINKEY=$($COIN_CLI masternode genkey)
   ERROR=$?
     if [ "$ERROR" -gt "0" ];  then
