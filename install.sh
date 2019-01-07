@@ -36,7 +36,7 @@ function download_node() {
 if [ ! -f "/usr/local/bin/ifpd" ]; then
   echo -e "Download $COIN_NAME"
   cd
-  wget -q $COIN_TGZ
+  wget $COIN_TGZ
   tar xvzf $COIN_ZIP
   rm $COIN_ZIP
   chmod +x $COIN_DAEMON $COIN_CLI
@@ -131,6 +131,7 @@ function get_ip() {
         echo ${INDEX} $ip
         let INDEX=${INDEX}+1
       done
+      echo "Please choose IP adress:"
       read -e choose_ip
       NODEIP=${NODE_IPS[$choose_ip]}
   else
@@ -225,11 +226,8 @@ function important_information() {
 
 function setup_node() {
   get_ip
-  echo "get_ip"
   create_config
-  echo "create_config"
   create_key
-  echo "create_key"
   update_config
   ifp_autorun
   ifp_start
