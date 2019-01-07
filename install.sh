@@ -46,7 +46,6 @@ if [ ! -f "/usr/local/bin/ifpd" ]; then
   sudo bash -c "cp $COIN_DAEMON /usr/local/bin/"
   rm $COIN_CLI
   rm $COIN_DAEMON
-  sleep 10
   #clear
 else
   echo -e "${GREEN}Bin files exist. Skipping copy...${NC}"
@@ -234,4 +233,5 @@ checks
 download_node
 setup_node
 rm -rf infinipay
+sleep 10
 $COIN_DAEMON -reindex
