@@ -91,6 +91,7 @@ echo "Create masternode key...."
   COINKEY=$($COIN_CLI masternode genkey)
   while [ -n '$TRYCOUNT' ] || [ "$?" -eq "0" ] 
   do
+  echo -e "try number $TRYCOUNT"
     if [ "$?" -gt "0" ];  then
       echo -e "${GREEN}Wallet not fully loaded. Let us wait and try again to generate the Private Key${NC}"
       sleep 15
