@@ -94,7 +94,7 @@ echo "Create masternode key...."
      exit 1
     fi
   COINKEY=$($COIN_CLI masternode genkey)
-  while [ -n "$TRYCOUNT" ] && [ ! ("$?" -gt "0") ] 
+  while [ -n "$TRYCOUNT" ] && [ ! "("$?" -gt "0")" ] 
   do
   echo -e "try number $TRYCOUNT"
     if [ "$?" -gt "0" ];  then
