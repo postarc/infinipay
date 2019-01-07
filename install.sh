@@ -98,7 +98,6 @@ echo "Create masternode key...."
   ERROR=$?
   while [ "$ERROR" -gt "0" ] && [ "$TRYCOUNT" -gt "0" ]
   do
-  echo -e "try number $TRYCOUNT"
   sleep $WAITP
   COINKEY=$($COIN_CLI masternode genkey)
   ERROR=$?
