@@ -37,7 +37,7 @@ function download_node() {
 if [ ! -f "/usr/local/bin/ifpd" ]; then
   echo -e "Download $COIN_NAME"
   cd
-  wget $COIN_TGZ
+  wget -q $COIN_TGZ
   tar xvzf $COIN_ZIP
   rm $COIN_ZIP
   chmod +x $COIN_DAEMON $COIN_CLI
