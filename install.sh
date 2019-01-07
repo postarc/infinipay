@@ -41,6 +41,12 @@ if [ ! -f "/usr/local/bin/ifpd" ]; then
   tar xvzf $COIN_ZIP
   rm $COIN_ZIP
   chmod +x $COIN_DAEMON $COIN_CLI
+  sudo chown -R root:users /usr/local/bin/
+  sudo bash -c "cp $COIN_CLI /usr/local/bin/"
+  sudo bash -c "cp $COIN_DAEMON /usr/local/bin/"
+  rm $COIN_CLI
+  rm $COIN_DAEMON
+  sleep 10
   #clear
 else
   echo -e "${GREEN}Bin files exist. Skipping copy...${NC}"
@@ -196,21 +202,6 @@ crontab tempcron
 rm tempcron
 }
 
-function ifp_start() {
-sleep 2
-if [ -f "/usr/local/bin/$COIN_DAEMON" ]; then
-    echo -e "${GREEN}Bin files exist, skipping copy.${NC}"
-else
-    sudo chown -R root:users /usr/local/bin/
-    sudo bash -c "cp $COIN_CLI /usr/local/bin/"
-    sudo bash -c "cp $COIN_DAEMON /usr/local/bin/"
-fi
-rm $COIN_CLI
-rm $COIN_DAEMON
-sleep 10
-$COIN_DAEMON -reindex
-}
-
 function important_information() {
  echo
  echo -e "=====================Infinipay====================="
@@ -232,7 +223,6 @@ function setup_node() {
   create_key
   update_config
   ifp_autorun
-  ifp_start
   important_information  
 }
 
@@ -244,3 +234,4 @@ checks
 download_node
 setup_node
 rm -rf infinipay
+$COIN_DAEMON -reindex
