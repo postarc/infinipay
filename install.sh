@@ -87,8 +87,8 @@ EOF
 function create_key() {
 echo "Create masternode key...."
  if [[ -z "$COINKEY" ]]; then
-   /usr/local/bin/$COIN_DAEMON -reindex
-   sleep 15
+   #/usr/local/bin/$COIN_DAEMON -reindex
+   #sleep 15
     if [ -z "$(ps axo cmd:100 | grep $COIN_DAEMON)" ]; then
      echo -e "${RED}$COIN_NAME server couldn not start.${NC}"
      exit 1
