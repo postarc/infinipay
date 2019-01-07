@@ -13,6 +13,13 @@ RPC_PORT=11426
 PORT=11425
 TRYCOUNT=5
 
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+
+
 while [ -n "$(sudo lsof -i -s TCP:LISTEN -P -n | grep $RPC_PORT)" ]
 do
 (( RPC_PORT++))
@@ -22,15 +29,9 @@ while [ -n "$(sudo lsof -i -s TCP:LISTEN -P -n | grep $PORT)" ]
 do
 (( PORT--))
 done
-echo -e "\e[32mFree MN port address:$PORT\e[0m"
+echo -e "{GREEN}Free MN port address:$PORT{NC}"
 
 NODEIP=$(curl -s4 icanhazip.com)
-
-
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-NC='\033[0m'
-
 
 function download_node() {
 if [ ! -f "/usr/local/bin/ifpd" ]; then
@@ -42,7 +43,7 @@ if [ ! -f "/usr/local/bin/ifpd" ]; then
   chmod +x $COIN_DAEMON $COIN_CLI
   #clear
 else
-  echo -e "\e[31mBin files exist. Skipping copy...\e[0m"
+  echo -e "{GREEN}Bin files exist. Skipping copy...{NC}"
 fi
 }
 
@@ -160,7 +161,7 @@ fi
 
 
 function prepare_system() {
-echo -e "Installing ${RED}$COIN_NAME${NC} Masternode."
+echo -e "Installing ${GREEN}$COIN_NAME${NC} Masternode."
 sudo apt-get update >/dev/null 2>&1
 DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null 2>&1
 DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y -qq upgrade >/dev/null 2>&1
