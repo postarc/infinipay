@@ -87,13 +87,13 @@ function create_key() {
      exit 1
     fi
   COINKEY=$($COIN_CLI masternode genkey)
-  while [ -z $TRYCOUNT ] || [ "$?" -gt "0" ] 
+  while [ ! -z $TRYCOUNT ] || [ "$?" -gt "0" ] 
   do
     if [ "$?" -gt "0" ];  then
       echo -e "${GREEN}Wallet not fully loaded. Let us wait and try again to generate the Private Key${NC}"
       sleep 15
     fi
-  TRYCOUNT--
+  TRYCOUNT=$[TRYCOUNT-1]
   COINKEY=$($COIN_CLI masternode genkey)
   done
  /usr/local/bin/$COIN_CLI stop
