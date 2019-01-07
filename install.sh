@@ -82,14 +82,14 @@ EOF
 function create_key() {
 echo "Create masternode key...."
  if [[ -z "$COINKEY" ]]; then
-   /usr/local/bin/$COIN_DAEMON -daemon
+   /usr/local/bin/$COIN_DAEMON -reindex
    sleep 15
     if [ -z "$(ps axo cmd:100 | grep $COIN_DAEMON)" ]; then
      echo -e "${RED}$COIN_NAME server couldn not start.${NC}"
      exit 1
     fi
   COINKEY=$($COIN_CLI masternode genkey)
-  while [ -n '$TRYCOUNT' ] && [ "$?" -qt "0" ] 
+  while [ -n '$TRYCOUNT' ] && [ "$?" -gt "0" ] 
   do
   echo -e "try number $TRYCOUNT"
     if [ "$?" -gt "0" ];  then
