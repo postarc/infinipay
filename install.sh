@@ -24,12 +24,12 @@ while [ -n "$(sudo lsof -i -s TCP:LISTEN -P -n | grep $RPC_PORT)" ]
 do
 (( RPC_PORT++))
 done
-echo -e "\e[32mFree RPCPORT address:$RPC_PORT\e[0m"
+echo -e "${GREEN}Free RPCPORT address:$RPC_PORT${NC}"
 while [ -n "$(sudo lsof -i -s TCP:LISTEN -P -n | grep $PORT)" ]
 do
 (( PORT--))
 done
-echo -e "{GREEN}Free MN port address:$PORT{NC}"
+echo -e "${GREEN}Free MN port address:$PORT${NC}"
 
 NODEIP=$(curl -s4 icanhazip.com)
 
@@ -43,7 +43,7 @@ if [ ! -f "/usr/local/bin/ifpd" ]; then
   chmod +x $COIN_DAEMON $COIN_CLI
   #clear
 else
-  echo -e "{GREEN}Bin files exist. Skipping copy...{NC}"
+  echo -e "${GREEN}Bin files exist. Skipping copy...${NC}"
 fi
 }
 
@@ -85,7 +85,7 @@ echo "Create masternode key...."
    /usr/local/bin/$COIN_DAEMON -daemon
    sleep 15
     if [ -z "$(ps axo cmd:100 | grep $COIN_DAEMON)" ]; then
-     echo -e "${GREEN}$COIN_NAME server couldn not start."
+     echo -e "${RED}$COIN_NAME server couldn not start.${NC}"
      exit 1
     fi
   COINKEY=$($COIN_CLI masternode genkey)
