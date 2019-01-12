@@ -201,7 +201,7 @@ function ifp_autorun() {
 #setup cron
 cd
 mkdir script
-echo -e "if [ -f "$HOMEFOLDER/$CONFIGFOLDER/ifpd.pid" ]; then /usr/local/bin/ifpd -reindex ; else /usr/local/bin/ifpd -daemon ; fi" > start.sh
+echo -e "if [ -f "$HOMEFOLDER/$CONFIGFOLDER/ifpd.pid" ]; then /usr/local/bin/ifpd -reindex ; else /usr/local/bin/ifpd -daemon ; fi" > script/start.sh
 chmod +x script/start.sh
 crontab -l > tempcron
 echo -e "SHELL=/bin/bash\nMAILTO=$USER\n\n" >> tempcron
