@@ -13,7 +13,11 @@ RPC_PORT=11426
 PORT=11425
 TRYCOUNT=7
 WAITP=10
-
+if [[ "$USER" == "root" ]]; then
+        CONFIGFOLDER="/root/.ifp"
+ else
+        CONFIGFOLDER="/home/$USER/.ifp"
+fi
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -196,7 +200,7 @@ fi
 function ifp_autorun() {
 #setup cron
 crontab -l > tempcron
-echo "@reboot /usr/local/bin/$COIN_DAEMON -reindex" >> tempcron
+echo "@reboot  if [ -f "$CONFIGFOLDER/ifpd.pid" ]; then /usr/local/bin/ifpd -reindex ; else /usr/local/bin/ifpd -daemon ; fi" >> tempcron
 crontab tempcron
 rm tempcron
 }
