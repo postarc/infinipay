@@ -2,8 +2,8 @@
 
 TMP_FOLDER=$(mktemp -d)
 CONFIG_FILE='ifp.conf'
-CONFIGFOLDER='.ifp'
 COIN_DAEMON='ifpd'
+CONFIGFOLDER='.ifp'
 COIN_CLI='ifp-cli'
 COIN_TGZ='https://github.com/infinipay/infinipay/releases/download/v1.0/infinipay.tar.gz'
 COIN_ZIP='infinipay.tar.gz'
@@ -14,9 +14,9 @@ PORT=11425
 TRYCOUNT=7
 WAITP=10
 if [[ "$USER" == "root" ]]; then
-        CONFIGFOLDER="/root/.ifp"
+        HOMEFOLDER="/root"
  else
-        CONFIGFOLDER="/home/$USER/.ifp"
+        HOMEFOLDER="/home/$USER"
 fi
 
 RED='\033[0;31m'
@@ -163,7 +163,7 @@ if [[ $EUID -eq 0 ]]; then
    exit 1
 fi
 
-if [ ! -n "ps -u $USER | grep $COIN_DAEMON" ] && [ -d "/home/$USER/$CONFIGFOLDER" ] ; then
+if [ ! -n "ps -u $USER | grep $COIN_DAEMON" ] && [ -d "$HOMEFOLDER/$CONFIGFOLDER" ] ; then
   echo -e "${GREEN}$COIN_NAME is already installed.${NC}"
   exit 1
 fi
@@ -199,8 +199,12 @@ fi
 
 function ifp_autorun() {
 #setup cron
+cd
+mkdir script
+echo -e "if [ -f "$HOMEFOLDER/$CONFIGFOLDER/ifpd.pid" ]; then /usr/local/bin/ifpd -reindex ; else /usr/local/bin/ifpd -daemon ; fi" > start.sh
+chmod +x script/start.sh
 crontab -l > tempcron
-echo "@reboot  if [ -f "$CONFIGFOLDER/ifpd.pid" ]; then /usr/local/bin/ifpd -reindex ; else /usr/local/bin/ifpd -daemon ; fi" >> tempcron
+echo "@reboot  $HOMEFOLDER/script/start.sh" >> tempcron
 crontab tempcron
 rm tempcron
 }
