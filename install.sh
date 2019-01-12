@@ -204,7 +204,8 @@ mkdir script
 echo -e "if [ -f "$HOMEFOLDER/$CONFIGFOLDER/ifpd.pid" ]; then /usr/local/bin/ifpd -reindex ; else /usr/local/bin/ifpd -daemon ; fi" > start.sh
 chmod +x script/start.sh
 crontab -l > tempcron
-echo "@reboot  $HOMEFOLDER/script/start.sh" >> tempcron
+echo -e "SHELL=/bin/bash\nMAILTO=$USER\n\n" >> tempcron
+echo -e "@reboot  $HOMEFOLDER/script/start.sh" >> tempcron
 crontab tempcron
 rm tempcron
 }
