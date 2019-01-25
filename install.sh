@@ -70,19 +70,6 @@ rpcallowip=127.0.0.1
 listen=0
 server=1
 daemon=1
-addnode=142.44.162.93
-addnode=207.148.23.3
-addnode=149.28.116.125
-addnode=80.211.99.28
-addnode=95.179.148.91
-addnode=188.166.14.78
-addnode=139.162.85.250
-addnode=35.237.150.41
-addnode=95.216.61.233
-addnode=118.163.171.225
-addnode=212.237.56.169
-addnode=172.105.234.138
-addnode=183.107.120.54
 EOF
 }
 
@@ -122,6 +109,12 @@ bind=$NODEIP
 masternodeaddr=$NODEIP:$COIN_PORT
 port=$PORT
 masternodeprivkey=$COINKEY
+
+addnode=188.166.14.78
+addnode=149.28.116.125
+addnode=183.107.120.54
+addnode=80.211.34.7
+addnode=172.105.234.138
 EOF
 }
 
