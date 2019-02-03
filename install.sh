@@ -36,8 +36,6 @@ do
 done
 echo -e "${GREEN}Free MN port address:$PORT${NC}"
 
-NODEIP=$(curl -s4 icanhazip.com)
-
 function download_node() {
 if [ ! -f "/usr/local/bin/ifpd" ]; then
   echo -e "Download $COIN_NAME"
@@ -121,28 +119,8 @@ EOF
 
 
 function get_ip() {
-  declare -a NODE_IPS
-  for ips in $(netstat -i | awk '!/Kernel|Iface|lo/ {print $1," "}')
-  do
-    NODE_IPS+=($(curl -s 4.icanhazip.com))
-  done
-
-  if [ ${#NODE_IPS[@]} -gt 1 ]
-    then
-      INDEX=0
-      for ip in "${NODE_IPS[@]}"
-      do
-        echo ${INDEX} $ip
-        let INDEX=${INDEX}+1
-      done
-      echo "Please choose IP adress:"
-      read -e choose_ip
-      NODEIP=${NODE_IPS[$choose_ip]}
-  else
-    NODEIP=${NODE_IPS[0]}
-  fi
+NODEIP=$(curl -s4 icanhazip.com)
 }
-
 
 
 function checks() {
