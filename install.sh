@@ -72,7 +72,8 @@ EOF
 }
 
 function create_key() {
-echo "Create masternode key...."
+echo "Input masternode key or ENTER:"
+read -e COINKEY
  if [[ -z "$COINKEY" ]]; then
    /usr/local/bin/$COIN_DAEMON -reindex
    sleep $WAITP
