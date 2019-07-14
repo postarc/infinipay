@@ -133,7 +133,7 @@ NODEIP=$(curl -s4 icanhazip.com)
 function checks() {
 if [[ $(lsb_release -d) != *16.04* ]]; then
   echo -e "${GREEN}You are not running Ubuntu 16.04. Installation is cancelled.${NC}"
-  exit 1
+#  exit 1
 fi
 
 if [[ $EUID -eq 0 ]]; then
